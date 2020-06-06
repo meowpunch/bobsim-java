@@ -5,11 +5,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "items")
+@Table(schema = "bobsim", name = "items")
 public class Item {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
     public LocalDateTime createdAt;
@@ -18,7 +16,7 @@ public class Item {
 
     public String name;
 
-    @Column(nullable = false, columnDefinition = "BIT")
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
     public Boolean sensitivity;
 
     public Item() {}
@@ -31,6 +29,7 @@ public class Item {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
