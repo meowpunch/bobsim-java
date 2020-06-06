@@ -22,9 +22,7 @@ public class ItemController {
     public ItemController(ItemService service) { this.service = service; }
 
     @GetMapping(value = "/items")
-    public List<Item> findAll() {
-        return service.findAll();
-    }
+    public List<Item> findAll() { return service.findAll(); }
 
     @GetMapping(value = "/items/{id}")
     public ResponseEntity<Item> get(@PathVariable Long id) {
