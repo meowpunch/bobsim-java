@@ -26,6 +26,8 @@ public class ItemService {
         return repository.findById(id);
     }
 
+    public void saveAll (List<Item> items) { repository.saveAll(items); }
+
     public void save(Item item) {
         repository.saveAndFlush(item);
     }

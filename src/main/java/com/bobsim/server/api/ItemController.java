@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -34,6 +35,15 @@ public class ItemController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping(value = "/items/batch")
+    public void addAll(@RequestBody List<Item> items) {
+        List<Item> updated = items.stream().peek(i -> {
+            i.setCreatedAt(LocalDateTime.now());
+            i.setUpdatedAt(LocalDateTime.now());
+        }).collect(Collectors.toList());
+        service.saveAll(updated);
     }
 
     @PostMapping(value = "/items")
