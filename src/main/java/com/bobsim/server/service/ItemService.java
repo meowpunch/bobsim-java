@@ -20,17 +20,23 @@ public class ItemService {
         this.repository = repository;
     }
 
-    public List<Item> findAll() { return repository.findAll(); }
+    public List<Item> findAll() {
+        return repository.findAll();
+    }
 
     public Optional<Item> findById(Long id) {
         return repository.findById(id);
     }
 
-    public void saveAll (List<Item> items) { repository.saveAll(items); }
+    public void saveAll (List<Item> items) {
+        repository.saveAll(items);
+    }
 
     public void save(Item item) {
         repository.saveAndFlush(item);
     }
 
-    public void delete(Long id) { repository.deleteById(id); }
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }

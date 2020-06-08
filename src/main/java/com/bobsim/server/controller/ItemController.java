@@ -1,4 +1,4 @@
-package com.bobsim.server.api;
+package com.bobsim.server.controller;
 
 import com.bobsim.server.model.Item;
 import com.bobsim.server.service.ItemService;
