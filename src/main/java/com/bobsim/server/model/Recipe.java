@@ -17,13 +17,14 @@ public class Recipe {
 
     public LocalDateTime updatedAt;
 
-    public String name ;
+    public String name;
 
-    public String source ;
+    public String source;
 
     public String source_url;
-    
-    public Recipe() {}
+
+    public Recipe() {
+    }
 
     public Recipe(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String source, String source_url) {
         this.id = id;
@@ -33,6 +34,7 @@ public class Recipe {
         this.source = source;
         this.source_url = source_url;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
