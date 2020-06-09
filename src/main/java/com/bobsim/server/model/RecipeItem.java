@@ -15,22 +15,25 @@ public class RecipeItem {
     public LocalDateTime updatedAt;
 
     @OneToOne
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     public Recipe recipe;
 
     @OneToOne
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "item_id", referencedColumnName = "id")
     public Item item;
 
-    public RecipeItem() {}
+    public RecipeItem() {
+    }
 
-    public RecipeItem(LocalDateTime createdAt, LocalDateTime updatedAt, Recipe recipe, Item item){
+    public RecipeItem(LocalDateTime createdAt, LocalDateTime updatedAt, Recipe recipe, Item item) {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.recipe = recipe;
         this.item = item;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
