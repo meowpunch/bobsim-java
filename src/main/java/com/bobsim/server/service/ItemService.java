@@ -28,7 +28,7 @@ public class ItemService {
         return repository.findById(id);
     }
 
-    public void saveAll (List<Item> items) {
+    public void saveAll(List<Item> items) {
         repository.saveAll(items);
     }
 
