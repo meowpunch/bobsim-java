@@ -1,4 +1,8 @@
 package com.bobsim.server.repository;
 
-public class RecipeItemRepository {
+import com.bobsim.server.model.RecipeItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RecipeItemRepository extends JpaRepository<RecipeItem, Long>  {
+
 }
