@@ -8,26 +8,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
 public class RecipeController {
-    
+
     final RecipeService service;
-    
+
     @Autowired
-    public RecipeController(RecipeService service){ this.service = service;}
-    
-    @GetMapping(value = "/recipes") 
-    public List<Recipe> findAll() { return service.findAll();}
-    
+    public RecipeController(RecipeService service) {
+        this.service = service;
+    }
+
+    @GetMapping(value = "/recipes")
+    public List<Recipe> findAll() {
+        return service.findAll();
+    }
+
     @GetMapping(value = "/recipes/{id}")
-    public ResponseEntity<Recipe> get(@PathVariable Long id) {
+    public ResponseEntity<Recipe> get(@PathVariable Integer id) {
         try {
             Optional<Recipe> recipe = service.findById(id);
             return recipe
@@ -40,28 +42,19 @@ public class RecipeController {
 
     @PostMapping(value = "/recipes/batch")
     public void addAll(@RequestBody List<Recipe> recipes) {
-        List<Recipe> updated = recipes.stream().peek(i -> {
-            i.setCreatedAt(LocalDateTime.now());
-            i.setUpdatedAt(LocalDateTime.now());
-        }).collect(Collectors.toList());
-        service.saveAll(updated);
+        service.saveAll(recipes);
     }
 
     @PostMapping(value = "/recipes")
     public void add(@RequestBody Recipe recipe) {
-        recipe.setCreatedAt(LocalDateTime.now());
-        recipe.setUpdatedAt(LocalDateTime.now());
         service.save(recipe);
     }
 
     @PutMapping(value = "/recipes/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Recipe recipe) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Recipe recipe) {
         try {
             Optional<Recipe> recipeOptional = service.findById(id);
             if (recipeOptional.isPresent()) {
-                recipe.setId(recipeOptional.get().getId());
-                recipe.setCreatedAt(recipeOptional.get().getCreatedAt());
-                recipe.setUpdatedAt(LocalDateTime.now());
                 service.save(recipe);
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
@@ -73,7 +66,7 @@ public class RecipeController {
     }
 
     @DeleteMapping(value = "/recipes/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id);
+    public void delete(@PathVariable Integer id) {
+        service.delete(id);
     }
-    
 }

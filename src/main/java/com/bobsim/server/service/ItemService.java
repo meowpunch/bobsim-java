@@ -24,7 +24,7 @@ public class ItemService {
         return repository.findAll();
     }
 
-    public Optional<Item> findById(Long id) {
+    public Optional<Item> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -36,7 +36,7 @@ public class ItemService {
         repository.saveAndFlush(item);
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         repository.deleteById(id);
     }
 }

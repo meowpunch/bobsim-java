@@ -24,7 +24,7 @@ public class RecipeService {
         return repository.findAll();
     }
 
-    public Optional<Recipe> findById(Long id) {
+    public Optional<Recipe> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -36,8 +36,7 @@ public class RecipeService {
         repository.saveAndFlush(recipe);
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         repository.deleteById(id);
     }
 }
-
