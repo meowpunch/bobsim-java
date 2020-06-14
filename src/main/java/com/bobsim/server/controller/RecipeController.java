@@ -1,6 +1,5 @@
 package com.bobsim.server.controller;
 
-
 import com.bobsim.server.model.Recipe;
 import com.bobsim.server.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;

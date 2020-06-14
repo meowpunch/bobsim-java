@@ -28,7 +28,7 @@ public class UserItemService {
         return itemService.findAllByIds(ids);
     }
 
-    public Optional<User> findRecipeById(Integer id) {
+    public Optional<User> findUserById(Integer id) {
         return userRepository.findById(id);
     }
 

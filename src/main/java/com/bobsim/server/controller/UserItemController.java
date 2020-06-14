@@ -22,12 +22,14 @@ public class UserItemController {
     }
 
     @PostMapping(value = "/users/{id}/items")
-    public ResponseEntity<?> add(@PathVariable Integer id, @RequestBody List<Integer> itemIds) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody List<Integer> itemIds) {
         try {
-            Optional<User> userOptional = service.findRecipeById(id);
+            Optional<User> userOptional = service.findUserById(id);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-                Set<Item> items = new HashSet<>(service.findAllItemsById(itemIds));
+                Set<Item> items = user.getItems();
+                Set<Item> newItems = new HashSet<>(service.findAllItemsById(itemIds));
+                items.addAll(newItems);
                 user.setItems(items);
                 service.save(user);
                 return new ResponseEntity<>(HttpStatus.OK);
