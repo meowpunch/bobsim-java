@@ -28,19 +28,19 @@ public class RecipeItemController {
     @PostMapping(value = "/recipes/{id}/items")
     public ResponseEntity<?> add(@PathVariable Integer id, @RequestBody List<Integer> itemIds) {
         try {
-            Set<Item> items = itemIds.stream()
-                    .map(itemId -> {
-                        Optional<Item> itemOptional = recipeItemService.findItemById(itemId);
-                        if (itemOptional.isPresent()) {
-                            return itemOptional.get();
-                        } else {
-                            throw new NoSuchElementException();
-                        }
-                    })
-                    .collect(Collectors.toSet());
             Optional<Recipe> recipeOptional = recipeItemService.findRecipeById(id);
             if (recipeOptional.isPresent()) {
                 Recipe recipe =  recipeOptional.get();
+                Set<Item> items = itemIds.stream()
+                        .map(itemId -> {
+                            Optional<Item> itemOptional = recipeItemService.findItemById(itemId);
+                            if (itemOptional.isPresent()) {
+                                return itemOptional.get();
+                            } else {
+                                throw new NoSuchElementException();
+                            }
+                        })
+                        .collect(Collectors.toSet());
                 recipe.setItems(items);
                 recipeItemService.save(recipe);
                 return new ResponseEntity<>(HttpStatus.OK);
