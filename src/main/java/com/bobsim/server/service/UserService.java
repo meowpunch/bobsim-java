@@ -1,7 +1,7 @@
 package com.bobsim.server.service;
 
-import com.bobsim.server.model.Recipe;
-import com.bobsim.server.repository.RecipeRepository;
+import com.bobsim.server.model.User;
+import com.bobsim.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,29 +11,29 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class RecipeService {
+public class UserService {
 
-    final RecipeRepository repository;
+    final UserRepository repository;
 
     @Autowired
-    public RecipeService(RecipeRepository repository) {
+    public UserService(UserRepository repository) {
         this.repository = repository;
     }
 
-    public List<Recipe> findAll() {
+    public List<User> findAll() {
         return repository.findAll();
     }
 
-    public Optional<Recipe> findById(Integer id) {
+    public Optional<User> findById(Integer id) {
         return repository.findById(id);
     }
 
-    public void saveAll(List<Recipe> recipes) {
-        repository.saveAll(recipes);
+    public void saveAll(List<User> users) {
+        repository.saveAll(users);
     }
 
-    public void save(Recipe recipe) {
-        repository.saveAndFlush(recipe);
+    public void save(User user) {
+        repository.saveAndFlush(user);
     }
 
     public void delete(Integer id) {

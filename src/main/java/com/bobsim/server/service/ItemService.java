@@ -28,6 +28,10 @@ public class ItemService {
         return repository.findById(id);
     }
 
+    public List<Item> findAllByIds(List<Integer> itemIds) {
+        return repository.findAllById(itemIds);
+    }
+
     public void saveAll(List<Item> items) {
         repository.saveAll(items);
     }

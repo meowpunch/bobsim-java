@@ -14,11 +14,11 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "recipes")
+@EqualsAndHashCode(exclude = "items")
 
 @Entity
-@Table(schema = "bobsim", name = "items")
-public class Item {
+@Table(schema = "bobsim", name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,14 +32,12 @@ public class Item {
 
     private String name;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
-    private Boolean sensitivity;
+    private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "items")
-    @JsonIgnoreProperties("items")
-    private Set<Recipe> recipes = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "items")
-    @JsonIgnoreProperties("items")
-    private Set<User> users = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_items",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties("users")
+    private Set<Item> items = new HashSet<>();
 }
