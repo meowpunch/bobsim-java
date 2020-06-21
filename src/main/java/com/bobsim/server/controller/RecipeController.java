@@ -68,4 +68,5 @@ public class RecipeController {
     public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
+
 }

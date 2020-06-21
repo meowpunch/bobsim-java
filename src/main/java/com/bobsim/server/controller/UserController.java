@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/users/{id}")
-    public ResponseEntity<User> get(@PathVariable Integer id) {
+    public ResponseEntity<User> findById(@PathVariable Integer id) {
         try {
             Optional<User> userOptional = service.findById(id);
             return userOptional
@@ -66,4 +66,5 @@ public class UserController {
     public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
+
 }
